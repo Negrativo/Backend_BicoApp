@@ -19,6 +19,8 @@
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.10",
     "@react-navigation/native": "^5.9.4",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.10",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-reanimated": "^2.1.0",
     "react-native-safe-area-context": "^3.2.0",

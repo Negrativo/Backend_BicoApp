@@ -1,0 +1,15 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "dev": "nodemon scr/server.js"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
