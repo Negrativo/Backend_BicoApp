@@ -22,31 +22,47 @@ const User = require('../model/User');
 
 module.exports = {
     async store(req, res) {
-        const { nome } = req.body; //email em chaves pois o JS busca o valor nome da const no Body
-        const { email } = req.body;
-        const { senha } = req.body;
+        const { cnomeuser  } = req.body; //nome do campo em chaves pois o JS busca o valor nome da const no Body
+        const { cmailuser  } = req.body;
+        const { csenhuser  } = req.body;
+        const { ccpfuser   } = req.body;
+        const { cendeuser  } = req.body;
+        const { cnascuser  } = req.body;
+        const { csexouser  } = req.body;
 
-        let user = await User.findOne({ nome });
+        let user = await User.findOne({ cnomeuser, ccpfuser });
 
         if (!user){
             user = await User.create({ 
-                nome,
-                email,
-                senha
+                cnomeuser,
+                cmailuser,
+                csenhuser,
+                ccpfuser,
+                cendeuser,
+                cnascuser,
+                csexouser
             })
         }
         return res.json(user);
     },
 
     async show(req, res) {
-        const { nome } = req.body; //email em chaves pois o JS busca o valor nome da const no Body
-        const { email } = req.body;
-        const { senha } = req.body;
-        
+        const { cnomeuser  } = req.body; //nome do campo em chaves pois o JS busca o valor nome da const no Body
+        const { cmailuser  } = req.body;
+        const { csenhuser  } = req.body;
+        const { ccpfuser   } = req.body;
+        const { cendeuser  } = req.body;
+        const { cnascuser  } = req.body;
+        const { csexouser  } = req.body;
+
         let user = await User.findOne(
-            { nome  },
-            { email },
-            { senha }
+            { cnomeuser  },
+            { cmailuser  },
+            { csenhuser  },
+            { ccpfuser   },
+            { cendeuser  },
+            { cnascuser  },
+            { csexouser  }
         );
 
         return res.json(user);

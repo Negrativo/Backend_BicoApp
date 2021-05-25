@@ -2,9 +2,14 @@ const mongoose = require('mongoose');
 
 //Schema -> tabela do user do Banco
 const UserSchema = new mongoose.Schema({
-    nome: String,
-    email: String,
-    senha: String
+    cnomeuser     : String,
+    cemaiuser     : String,
+    csenhuser     : String,
+    ccpfuser      : String,
+    cendeuser     : String,
+    dnascuser     : String,
+    csexouser     : String,
+    npontuser     : Double
 });
 
 
