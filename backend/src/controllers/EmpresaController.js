@@ -4,11 +4,18 @@ module.exports = {
 
 
     async store(req, res) {
-        const { crazaosoc  } = req.body; //nome do campo em chaves pois o JS busca o valor nome da const no Body
-        const { cnomefant  } = req.body;
-        const { ccnpjempr  } = req.body;
-        const { cendeempr  } = req.body;
+        const { filename } = req.file;
 
+        const { user_id } = req.headers;
+
+        const { 
+            crazaosoc,
+            cnomefant,
+            ccnpjempr,
+            cendeempr,
+            iperfempr,
+            nnumeuser } = req.body;
+ 
         let empresa = await Empresa.findOne({ cnomefant, ccnpjempr });
 
         if (!empresa){
@@ -16,23 +23,32 @@ module.exports = {
                 crazaosoc,
                 cnomefant,
                 ccnpjempr,
-                cendeempr
+                cendeempr,
+                iperfempr,
+                nnumeuser
             })
         }
         return res.json(empresa);
     },
 
     async show(req, res) {
-        const { crazaosoc } = req.body; //nome do campo em chaves pois o JS busca o valor nome da const no Body
-        const { cnomefant } = req.body;
-        const { ccnpjempr } = req.body;
-        const { cendeempr } = req.body;
+        const { user_id } = req.headers;
+
+        const { 
+            crazaosoc,
+            cnomefant,
+            ccnpjempr,
+            cendeempr,
+            iperfempr,
+            nnumeuser } = req.body;
 
         let empresa = await Empresa.findOne({ 
               crazaosoc,
               cnomefant,
               ccnpjempr,
-              cendeempr 
+              cendeempr,
+              iperfempr,
+              nnumeuser 
         });
 
         return res.json(empresa);

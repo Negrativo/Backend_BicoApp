@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 //Schema -> tabela de empresa no Banco
 const EmprSchema = new mongoose.Schema({
+    iperfempr     : String,
     crazaosoc     : String,
     cnomefant     : String,
     ccnpjempr     : String,
