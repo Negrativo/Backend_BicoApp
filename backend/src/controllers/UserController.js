@@ -22,17 +22,12 @@ const User = require('../model/User');
 
 module.exports = {
     async store(req, res) {
-        console.log(req.body);
-        console.log(req.file);
-
         const { filename } = req.file;
-
-        
         
          //nome do campo em chaves pois o JS busca o valor nome da const no Body
-        const { 
-            cnomeuser,
-            iperfuser,
+        const {
+            iperfuser, 
+            cnomeuser,            
             cmailuser,
             csenhuser,
             cendeuser,
@@ -45,8 +40,8 @@ module.exports = {
 
         if (!user){
             user = await User.create({ 
+                iperfuser: filename,               
                 cnomeuser,
-                iperfuser,
                 cmailuser,
                 csenhuser,
                 cendeuser,
@@ -73,17 +68,18 @@ module.exports = {
             ccpfuser } = req.body;
 
         let user = await User.findOne(
-            { cnomeuser },
-            { cmailuser },
-            { csenhuser },
-            { ccpfuser  },
-            { cendeuser },
-            { cnascuser },
-            { csexouser },
-            { iperfuser },
-            { npontuser }
+            {cnomeuser ,
+             cmailuser ,
+             csenhuser ,
+             ccpfuser  ,
+             cendeuser ,
+             cnascuser ,
+             csexouser ,
+             iperfuser ,
+             npontuser }
         );
 
         return res.json(user);
-    }
+    },
+
 };
