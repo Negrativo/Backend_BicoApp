@@ -22,11 +22,9 @@ const User = require('../model/User');
 
 module.exports = {
     async store(req, res) {
-        const { filename } = req.file;
         
          //nome do campo em chaves pois o JS busca o valor nome da const no Body
         const {
-            iperfuser, 
             cnomeuser,            
             cmailuser,
             csenhuser,
@@ -40,7 +38,7 @@ module.exports = {
 
         if (!user){
             user = await User.create({ 
-                iperfuser: filename,               
+                iperfuser: req.file,               
                 cnomeuser,
                 cmailuser,
                 csenhuser,
