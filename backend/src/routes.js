@@ -4,6 +4,7 @@ const multer = require('multer');
 const UserController = require('./controllers/UserController');
 const EmpresaController = require('./controllers/EmpresaController');
 const FavoritosController = require('./controllers/FavoritosController');
+const LoginController = require('./controllers/LoginController');
 const uploadConfig = require('./config/upload');
 
 //GET, POST, PUT, DELETE
@@ -18,6 +19,7 @@ routes.get('/empresa/dados', upload.single('iperfempr'), EmpresaController.show 
 
 routes.get('/favoritos', FavoritosController.store );
 
+routes.get('/login', LoginController.show );
 
 
 module.exports = routes;

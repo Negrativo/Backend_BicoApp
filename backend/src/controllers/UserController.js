@@ -64,20 +64,25 @@ module.exports = {
             cnascuser,
             csexouser,
             ccpfuser } = req.body;
-
+     
         let user = await User.findOne(
             {cnomeuser ,
-             cmailuser ,
-             csenhuser ,
-             ccpfuser  ,
-             cendeuser ,
-             cnascuser ,
-             csexouser ,
-             iperfuser ,
-             npontuser }
+            cmailuser ,
+            csenhuser ,
+            ccpfuser  ,
+            cendeuser ,
+            cnascuser ,
+            csexouser ,
+            iperfuser ,
+            npontuser }
         );
 
-        return res.json(user);
+        if(user){
+            return res.json(user);
+        }else{
+            return res.status(400).send({secess: false, message: 'Usuario não localizado'});
+        }
+
     },
 
 };
