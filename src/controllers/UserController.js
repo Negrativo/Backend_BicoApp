@@ -82,4 +82,27 @@ module.exports = {
         return res.json(user);
     },
 
+    async login(req, res) {
+        
+        const { 
+            iperfuser,
+            cmailuser,
+            csenhuser } = req.body;
+
+        let user = await User.findOne(
+            {cmailuser ,
+             csenhuser ,
+             iperfuser }
+        );
+    
+        return res.json(user);
+    },
+
+    async groupProfissionais(req, res) {
+    
+        let user = await User.find();
+    
+        return res.json(user);
+
+    }
 };
