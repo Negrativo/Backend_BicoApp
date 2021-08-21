@@ -1,5 +1,5 @@
 const Empresa = require("../model/Empresa");
-const User = require("../model/User");
+const User = require("../model/Profissional");
 
 module.exports = {
 

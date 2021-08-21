@@ -2,7 +2,7 @@
 Controller recebe requisição e devolve uma resposta
 */ 
 
-const User = require('../model/User');
+const User = require('../model/Profissional');
 
 /* 
     index = metodo de retorno de listagem

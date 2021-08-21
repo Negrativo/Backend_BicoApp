@@ -1,0 +1,4 @@
+Descrição do problema
+
+Estamos em uma era de crise, onde a demanda por emprego esta em alta e há diversas empresas que não consegue localizar colaboradores ideais. A missão é criar uma API em que faça o contato entre empresa e profissional, onde possam entrar em contato para que seja feito a entrevista. Ambos devem ter dados solidos e que garantam sua identidade, para que seja possivel analisar o perfil e com isso contata-los de ambos os lados. Como tambem, deve haver a possibilidade de favoritar uma empresa ou profissional de interesse.
+Ambos podem realizar review sobre a experiencia com a contatação atraves do aplicativo, no qual poderá ou nao ser apresentado nos detalhes da empresa ou profissional. 

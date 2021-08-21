@@ -1,0 +1,26 @@
+{
+  "name": "backend_bicoapp",
+  "version": "1.0.0",
+  "description": "Backend aplicativo Bico",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.13.7",
+    "multer": "^1.4.3",
+    "nodemon": "^2.0.12"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Negrativo/Backend_BicoApp.git"
+  },
+  "author": "Joao Lucas Rodrigues de Souza",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Negrativo/Backend_BicoApp/issues"
+  },
+  "homepage": "https://github.com/Negrativo/Backend_BicoApp#readme"
+}
