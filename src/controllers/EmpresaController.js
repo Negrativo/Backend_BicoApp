@@ -5,62 +5,80 @@ module.exports = {
 
 
     async store(req, res) {
-        const { filename } = req.file;
-        const { user_id } = req.headers;
+        try {
+            const { filename } = req.file;
 
-        const user = await User.findById(user_id)
+            const { nomeEmp, razaoSocial, nomeFantasia,
+                    cnpjEmp, enderecoEmp, emailEmp, senhaEmp  } = req.body;
 
-        if (!user) {
-            return res.status(400).json("User não existe");
+            let empresa = await Empresa.findOne({ nomeEmp, emailEmp });
+
+            if (!empresa){
+                empresa = await Empresa.create({ 
+                    imagemPerfil: filename, nomeEmp, razaoSocial, nomeFantasia,
+                    cnpjEmp, enderecoEmp, emailEmp, senhaEmp
+                });
+                return res.status(201).json(empresa);
+            } else
+                return res.status(404).json({error: 'Data exist'});
+        } catch(e) {
+            res.status(500).send(e.message);
         }
-
-        const { 
-            crazaosoc,
-            cnomefant,
-            ccnpjempr,
-            cendeempr,
-            iperfempr,
-            nnumeuser } = req.body;
- 
-        let empresa = await Empresa.findOne({ cnomefant, ccnpjempr });
-
-        if (!empresa){
-            empresa = await Empresa.create({ 
-                crazaosoc,
-                cnomefant,
-                ccnpjempr,
-                cendeempr,
-                iperfempr: filename,
-                nnumeuser: user_id
-            })
-        }
-        return res.json(empresa);
     },
 
     async show(req, res) {
-        const { user_id } = req.headers;
+        try {
+            const { filename } = req.file;
 
-        const { 
-            crazaosoc,
-            cnomefant,
-            ccnpjempr,
-            cendeempr,
-            iperfempr,
-            nnumeuser } = req.body;
+            const { nomeEmp, razaoSocial, nomeFantasia,
+                    cnpjEmp, enderecoEmp, emailEmp, senhaEmp  } = req.body;
 
-        let empresa = await Empresa.findOne({ 
-              crazaosoc,
-              cnomefant,
-              ccnpjempr,
-              cendeempr,
-              iperfempr,
-              nnumeuser 
-        });
+            let empresa = await Empresa.findOne({ nomeEmp, emailEmp });
 
-        return res.json(empresa);
-    } 
+            if (!empresa){
+                empresa = await Empresa.create({ 
+                    imagemPerfil: filename, nomeEmp, razaoSocial, nomeFantasia,
+                    cnpjEmp, enderecoEmp, emailEmp, senhaEmp
+                });
+                return res.status(201).json(empresa);
+            } else
+                return res.status(404).json({error: 'Data exist'});
+        } catch(e) {
+            res.status(500).send(e.message);
+        }
+    }, 
 
+    async update(req, res) {
+        try {
+            const { _id,  nomeEmp, razaoSocial, nomeFantasia,
+                    cnpjEmp, enderecoEmp, emailEmp, senhaEmp } = req.body;
+            
+            let empresa = await Empresa.findById(_id);
 
-    
+            if (empresa) {
+                await Empresa.findByIdAndUpdate(_id,{nomeEmp, razaoSocial, nomeFantasia, 
+                                                cnpjEmp, enderecoEmp, emailEmp, senhaEmp});
+                return res.status(200).json({ sucess : "Updation successfully"});
+            } else
+                return res.status(404).send({ error : 'Not Found'});
+        } catch (e) {
+            res.status(500).send(e.message);
+        }
+    },
 
+    async destroy(req, res) {
+        try {
+            const { _id, senhaEmp } = req.body;
+            
+            let empresa = await Empresa.findById(_id);
+
+            if (empresa) {
+                await Empresa.findByIdAndDelete(_id, { senhaEmp });
+                return res.status(200).json({ sucess : "deleted successfully"});
+            } else
+                return res.status(404).send({ error : 'Not Found'});
+        } catch (e) {
+            res.status(500).send(e.message);
+        }
+    }
 };

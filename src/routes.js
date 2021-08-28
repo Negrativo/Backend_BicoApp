@@ -11,10 +11,10 @@ const uploadConfig = require('./config/upload');
 const upload = multer(uploadConfig);
 
 routes.post('/usuario/cadastro', upload.single('imagemPerfil'), userController.store);
-routes.get('/usuario/dados', userController.groupProfissionais);
+routes.get('/usuario/dados', userController.show);
 
 routes.post('/empresa/cadastro', upload.single('imagemPerfil'), empresaController.store);
-routes.get('/empresa/dados', upload.single('imagemPerfil'), empresaController.show);
+routes.get('/empresa/dados', empresaController.show);
 
 routes.post('/cadastro', inicioController.cadastrar);
 routes.get('/login', inicioController.login);

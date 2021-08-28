@@ -11,7 +11,7 @@ const EmpresaSchema = new mongoose.Schema({
     enderecoEmp     : String,
     imagemPerfil    : String,
     emailEmp        : String,
-    senhaProf       : String
+    senhaEmp        : String
 });
 
-module.exports = mongoose.model('Empresa', EmpresaSchema);
+module.exports = mongoose.model('Empresa', EmpresaSchema);   
