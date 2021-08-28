@@ -12,9 +12,13 @@ const upload = multer(uploadConfig);
 
 routes.post('/usuario/cadastro', upload.single('imagemPerfil'), userController.store);
 routes.get('/usuario/dados', userController.show);
+routes.put('/usuario/alterarDados', userController.update);
+routes.post('/usuario/deletar', userController.destroy);
 
 routes.post('/empresa/cadastro', upload.single('imagemPerfil'), empresaController.store);
 routes.get('/empresa/dados', empresaController.show);
+routes.put('/empresa/alterarDados', empresaController.update);
+routes.post('/empresa/deletar', empresaController.destroy);
 
 routes.post('/cadastro', inicioController.cadastrar);
 routes.get('/login', inicioController.login);

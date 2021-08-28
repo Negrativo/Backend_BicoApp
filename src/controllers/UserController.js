@@ -13,7 +13,7 @@ module.exports = {
             if (!user){
                 user = await User.create({ 
                     imagemPerfil: filename, nome, email,
-                    senha, endereco, avaliacao,cpfuser
+                    senha, endereco, avaliacao, cpfuser
                 });
                 return res.status(201).json(user);
             } else
