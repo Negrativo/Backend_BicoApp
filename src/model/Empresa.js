@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
 
-//Schema -> tabela de empresa no Banco
-const EmprSchema = new mongoose.Schema({
-    nomeEmp         : String,
+const EmpresaSchema = new mongoose.Schema({
+    nomeEmp         : {
+        type: String,
+        require: [true, 'Nome obrigatorio']
+    },
     razaoSocial     : String,
     nomeFantasia    : String,
     cnpjEmp         : String,
@@ -12,5 +14,4 @@ const EmprSchema = new mongoose.Schema({
     senhaProf       : String
 });
 
-
-module.exports = mongoose.model('Empresa',EmprSchema);
+module.exports = mongoose.model('Empresa', EmpresaSchema);

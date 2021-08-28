@@ -1,108 +1,77 @@
-/*
-Controller recebe requisição e devolve uma resposta
-*/ 
-
-const User = require('../model/Profissional');
-
-/* 
-    index = metodo de retorno de listagem
-
-    show = metodo de retorno de uma unica 
-
-    Store = metodo de criar 
-
-    Update = metodo de alterar 
-
-    destroy = metodo de deletar 
-*/
-
-//req.query = Acessar query params (para filtros)
-//req.params = Acessar route params (para edição, delete)
-//req.body = Acessar corpo da requisição (para criação, edição)
+const User = require('../model/Usuario');
 
 module.exports = {
     async store(req, res) {
-        const { filename } = req.file;
-        
-         //nome do campo em chaves pois o JS busca o valor nome da const no Body
-        const {
-            iperfuser, 
-            cnomeuser,            
-            cmailuser,
-            csenhuser,
-            cendeuser,
-            npontuser,
-            cnascuser,
-            csexouser,
-            ccpfuser } = req.body;
+        try {
+            const { filename } = req.file;
 
-        let user = await User.findOne({ cnomeuser, cmailuser });
+            const { nome, email, senha, 
+                    endereco, avaliacao, cpfuser } = req.body;
 
-        if (!user){
-            user = await User.create({ 
-                iperfuser: filename,               
-                cnomeuser,
-                cmailuser,
-                csenhuser,
-                cendeuser,
-                npontuser,
-                cnascuser,
-                csexouser,
-                ccpfuser
-            })
+            let user = await User.findOne({ nome, email });
+
+            if (!user){
+                user = await User.create({ 
+                    imagemPerfil: filename, nome, email,
+                    senha, endereco, avaliacao,cpfuser
+                });
+                return res.status(201).json(user);
+            } else
+                return res.status(404).json({error: 'User exist'});
+        } catch(e) {
+            res.status(500).send(e.message);
         }
-        return res.json(user);
     },
 
     async show(req, res) {
-        
-        const { 
-            cnomeuser,
-            iperfuser,
-            cmailuser,
-            csenhuser,
-            cendeuser,
-            npontuser,
-            cnascuser,
-            csexouser,
-            ccpfuser } = req.body;
+        try {
+            const { nome, email, senha, 
+                    endereco, avaliacao, cpfuser } = req.body;
 
-        let user = await User.findOne(
-            {cnomeuser ,
-             cmailuser ,
-             csenhuser ,
-             ccpfuser  ,
-             cendeuser ,
-             cnascuser ,
-             csexouser ,
-             iperfuser ,
-             npontuser }
-        );
+            let user = await User.findOne({ 
+                                nome, email, senha, 
+                                endereco, avaliacao, cpfuser });
 
-        return res.json(user);
+            if (user){
+                return res.status(200).json(user);
+            } else
+                return res.status(404).json({error: 'Not Found'});
+        } catch(e) {
+            res.status(500).send(e.message);
+        }        
     },
 
-    async login(req, res) {
-        
-        const { 
-            iperfuser,
-            cmailuser,
-            csenhuser } = req.body;
+    async update(req, res) {
+        try {
+            const { _id,  nome, email,senha, 
+                    endereco, avaliacao,cpfuser } = req.body;
+            
+            let user = await User.findById(_id);
 
-        let user = await User.findOne(
-            {cmailuser ,
-             csenhuser ,
-             iperfuser }
-        );
-    
-        return res.json(user);
+            if (user) {
+                await User.findByIdAndUpdate(_id,{nome, email, senha, endereco, avaliacao, cpfuser});
+                return res.status(200).json({ sucess : "Updation successfully"});
+            } else
+                return res.status(404).send({ error : 'Not Found'});
+
+        } catch (e) {
+            res.status(500).send(e.message);
+        }
     },
 
-    async groupProfissionais(req, res) {
-    
-        let user = await User.find();
-    
-        return res.json(user);
+    async destroy(req, res) {
+        try {
+            const { _id, senha } = req.body;
+            
+            let user = await User.findById(_id);
 
+            if (user) {
+                await User.findByIdAndDelete(_id, { senha });
+                return res.status(200).json({ sucess : "deleted successfully"});
+            } else
+                return res.status(404).send({ error : 'Not Found'});
+        } catch (e) {
+            res.status(500).send(e.message);
+        }
     }
 };

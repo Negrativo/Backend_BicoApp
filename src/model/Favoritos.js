@@ -1,15 +1,15 @@
 const mongoose = require('mongoose');
-const Empresa = require("../model/Empresa");
 
-//Schema -> tabela de empresa no Banco
 const FavoritoSchema = new mongoose.Schema({ 
-    nnumeuser     : {
+    usuario     : {
         type: mongoose.Schema.Types.ObjectId,
-        ref : 'User'
+        ref : 'User',
+        require: [true, 'Usario requerido']
     },
-    nnumeempr     : {
+    empresa     : {
         type: mongoose.Schema.Types.ObjectId,
-        ref : 'Empresa'
+        ref : 'Empresa',
+        require: [true, 'Usario requerido']
     }
 
 });
