@@ -17,7 +17,7 @@ module.exports = {
                 });
                 return res.status(201).json(user);
             } else
-                return res.status(404).json({error: 'User exist'});
+                return res.status(409).json({error: 'User exist'});
         } catch(e) {
             res.status(500).send(e.message);
         }

@@ -21,7 +21,7 @@ routes.put('/empresa/alterarDados', empresaController.update);
 routes.post('/empresa/deletar', empresaController.destroy);
 
 routes.post('/cadastro', inicioController.cadastrar);
-routes.get('/login', inicioController.login);
+routes.post('/login', inicioController.login);
 
 routes.get('/principal/lista', principalController.groupProfissionais);
 
