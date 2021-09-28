@@ -6,6 +6,7 @@ const empresaController = require('./controllers/EmpresaController');
 const inicioController = require('./controllers/InicioController');
 const principalController = require('./controllers/PrincipalController');
 const pesquisaController = require('./controllers/PesquisaController');
+const favoritoController = require('./controllers/FavoritosController');
 
 const routes = express.Router();
 const uploadConfig = require('./config/upload');
@@ -30,5 +31,11 @@ routes.post('/pesquisa/salvarCargo', pesquisaController.store);
 routes.get('/pesquisa/cargo', pesquisaController.show);
 routes.get('/pesquisa/cargos', pesquisaController.listAll);
 routes.post('/pesquisa/apagarCargo', pesquisaController.destroy);
+
+routes.post('/favorito/adicionar', favoritoController.store);
+routes.get('/favorito/buscar', favoritoController.show);
+routes.post('/favorito/atualizar', favoritoController.update);
+routes.post('/favorito/remover', favoritoController.destroy);
+routes.get('/favorito/listagem', favoritoController.listAll);
 
 module.exports = routes;

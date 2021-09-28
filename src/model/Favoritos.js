@@ -2,16 +2,13 @@ const mongoose = require('mongoose');
 
 const FavoritoSchema = new mongoose.Schema({ 
     usuario     : {
-        type: mongoose.Schema.Types.ObjectId,
-        ref : 'User',
-        require: [true, 'Usario requerido']
+        type: String,
+        required: [true, 'Usuario obrigatorio']
     },
-    empresa     : {
-        type: mongoose.Schema.Types.ObjectId,
-        ref : 'Empresa',
-        require: [true, 'Usario requerido']
+    favoritosIds  : {
+        type: [String],
+        required: [true, 'Favorito obrigatorio']
     }
-
 });
 
 

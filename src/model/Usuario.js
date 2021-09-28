@@ -20,7 +20,7 @@ const UsuarioSchema = new mongoose.Schema({
     cpfuser         : String,
     imagemPerfil    : String,
     avaliacao       : Number,
-    favoritos       : [String]
+    favoritosIds    : [String]
 });
 
 
