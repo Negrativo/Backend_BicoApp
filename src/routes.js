@@ -5,6 +5,7 @@ const userController = require('./controllers/UserController');
 const empresaController = require('./controllers/EmpresaController');
 const inicioController = require('./controllers/InicioController');
 const principalController = require('./controllers/PrincipalController');
+const pesquisaController = require('./controllers/PesquisaController');
 
 const routes = express.Router();
 const uploadConfig = require('./config/upload');
@@ -24,5 +25,10 @@ routes.post('/cadastro', inicioController.cadastrar);
 routes.post('/login', inicioController.login);
 
 routes.get('/principal/lista', principalController.groupProfissionais);
+
+routes.post('/pesquisa/salvarCargo', pesquisaController.store);
+routes.get('/pesquisa/cargo', pesquisaController.show);
+routes.get('/pesquisa/cargos', pesquisaController.listAll);
+routes.post('/pesquisa/apagarCargo', pesquisaController.destroy);
 
 module.exports = routes;
