@@ -1,3 +1,4 @@
+const { findById } = require('../model/Usuario');
 const User = require('../model/Usuario');
 
 module.exports = {
@@ -39,6 +40,21 @@ module.exports = {
         } catch(e) {
             res.status(500).send(e.message);
         }        
+    },
+
+    async findById(req, res) {
+        try {
+            const { _id } = req.body;
+            console.log(_id);
+            let user = await User.findById(_id);
+
+            if (user){
+                return res.status(200).json(user);
+            } else
+                return res.status(404).json({error: 'Not Found'});
+        } catch(e) {
+            res.status(500).send(e.message);
+        }  
     },
 
     async update(req, res) {
