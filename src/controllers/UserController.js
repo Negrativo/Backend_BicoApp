@@ -44,8 +44,8 @@ module.exports = {
 
     async findById(req, res) {
         try {
-            const { _id } = req.body;
-            console.log(_id);
+            const { _id } = req.params;
+            console.Idg(_id);
             let user = await User.findById(_id);
 
             if (user){
