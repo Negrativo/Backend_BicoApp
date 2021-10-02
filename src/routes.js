@@ -14,7 +14,7 @@ const upload = multer(uploadConfig);
 
 routes.post('/usuario/cadastro', upload.single('imagemPerfil'), userController.store);
 routes.get('/usuario/dados', userController.show);
-routes.put('/usuario/alterarDados', userController.update);
+routes.put('/usuario/alterarDados', upload.single('imagemPerfil'), userController.update);
 routes.post('/usuario/deletar', userController.destroy);
 routes.get('/usuario/dadosSelecionado/{id}', userController.findById);
 
@@ -25,6 +25,7 @@ routes.post('/empresa/deletar', empresaController.destroy);
 
 routes.post('/cadastro', inicioController.cadastrar);
 routes.post('/login', inicioController.login);
+routes.post('/cadastro/conclusao', upload.single('imagemPerfil'), inicioController.finalizarCadastro);
 
 routes.get('/principal/lista', principalController.groupProfissionais);
 

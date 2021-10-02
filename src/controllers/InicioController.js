@@ -30,5 +30,23 @@ module.exports = {
         } catch(e) {
             res.status(500).send(e.message);
         }
+    },
+
+    async finalizarCadastro(req, res) {
+        console.log(req);
+        try {
+            const { imagemPerfil } = req.file;
+            const { _id } = req.body;
+            console.log(imagemPerfil, _id);
+            let user = await User.findById(_id);
+            
+            if (user){
+                await User.findByIdAndUpdate(_id,{nome, imagemPerfil, avaliacao, descricao});
+                return res.status(200).json({ sucess : "Updation successfully"});
+            }else
+                return res.status(409).json({error: 'Usuario já cadastrado'});
+        } catch(e) {
+            res.status(500).send(e.message);
+        }
     }
 };

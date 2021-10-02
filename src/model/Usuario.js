@@ -17,7 +17,7 @@ const UsuarioSchema = new mongoose.Schema({
         max:  20,
         min:  5
     },
-    cpfuser         : String,
+    descricao       : String,
     imagemPerfil    : String,
     avaliacao       : Number,
     favoritosIds    : [String]
