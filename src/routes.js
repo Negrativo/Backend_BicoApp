@@ -7,6 +7,7 @@ const inicioController = require('./controllers/InicioController');
 const principalController = require('./controllers/PrincipalController');
 const pesquisaController = require('./controllers/PesquisaController');
 const favoritoController = require('./controllers/FavoritosController');
+const funcoesController = require('./controllers/FuncoesController');
 
 const routes = express.Router();
 const uploadConfig = require('./config/upload');
@@ -25,7 +26,7 @@ routes.post('/empresa/deletar', empresaController.destroy);
 
 routes.post('/cadastro', inicioController.cadastrar);
 routes.post('/login', inicioController.login);
-routes.post('/cadastro/conclusao', upload.single('imagemPerfil'), inicioController.finalizarCadastro);
+routes.post('/cadastro/conclusao', userController.store);
 
 routes.get('/principal/lista', principalController.groupProfissionais);
 
@@ -39,5 +40,7 @@ routes.get('/favorito/buscar', favoritoController.show);
 routes.post('/favorito/atualizar', favoritoController.update);
 routes.post('/favorito/remover', favoritoController.destroy);
 routes.get('/favorito/listagem', favoritoController.listAll);
+
+routes.post('/usuario/deletarTodos', funcoesController.deleteAllUser);
 
 module.exports = routes;

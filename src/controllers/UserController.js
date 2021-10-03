@@ -4,17 +4,15 @@ const User = require('../model/Usuario');
 module.exports = {
     async store(req, res) {
         try {
-            const { filename } = req.file;
-
-            const { nome, email, senha, 
-                    endereco, avaliacao, cpfuser } = req.body;
+            const { nome, email, senha, descricao, fotoPerfil, 
+                    favoritosIds, empregos } = req.body;
 
             let user = await User.findOne({ nome, email });
 
             if (!user){
                 user = await User.create({ 
-                    imagemPerfil: filename, nome, email,
-                    senha, endereco, avaliacao, cpfuser
+                    nome, email, senha, descricao, fotoPerfil, 
+                    favoritosIds, empregos
                 });
                 return res.status(201).json(user);
             } else

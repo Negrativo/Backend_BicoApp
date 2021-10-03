@@ -35,13 +35,12 @@ module.exports = {
     async finalizarCadastro(req, res) {
         console.log(req);
         try {
-            const { imagemPerfil } = req.file;
-            const { _id } = req.body;
-            console.log(imagemPerfil, _id);
+            const { _id, fotoPerfil, empregos, descricao } = req.body;
+            console.log(fotoPerfil, _id, empregos, descricao);
             let user = await User.findById(_id);
             
             if (user){
-                await User.findByIdAndUpdate(_id,{nome, imagemPerfil, avaliacao, descricao});
+                await User.findByIdAndUpdate(_id,{ imagemPerfil, fotoPerfil, empregos, descricao});
                 return res.status(200).json({ sucess : "Updation successfully"});
             }else
                 return res.status(409).json({error: 'Usuario já cadastrado'});

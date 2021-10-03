@@ -17,10 +17,26 @@ const UsuarioSchema = new mongoose.Schema({
         max:  20,
         min:  5
     },
-    descricao       : String,
-    imagemPerfil    : String,
-    avaliacao       : Number,
-    favoritosIds    : [String]
+    descricao       : {
+        type: String,
+        default: '',
+    },
+    fotoPerfil      : {
+        type: String,
+        default: ''
+    },
+    avaliacao       : {
+        type: Number,
+        default: ''
+    },
+    favoritosIds    : {
+        type: [String],
+        default: ['']
+    },
+    empregos        : {
+        type: [String],
+        default: ['']
+    }, 
 });
 
 
