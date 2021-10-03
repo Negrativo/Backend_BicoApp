@@ -42,10 +42,8 @@ module.exports = {
 
     async findById(req, res) {
         try {
-            const { _id } = req.params;
-            console.Idg(_id);
+            const { _id } = req.body;
             let user = await User.findById(_id);
-
             if (user){
                 return res.status(200).json(user);
             } else

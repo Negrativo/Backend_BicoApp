@@ -17,7 +17,7 @@ routes.post('/usuario/cadastro', upload.single('imagemPerfil'), userController.s
 routes.get('/usuario/dados', userController.show);
 routes.put('/usuario/alterarDados', upload.single('imagemPerfil'), userController.update);
 routes.post('/usuario/deletar', userController.destroy);
-routes.get('/usuario/dadosSelecionado/{id}', userController.findById);
+routes.post('/usuario/dadosSelecionado', userController.findById);
 
 routes.post('/empresa/cadastro', upload.single('imagemPerfil'), empresaController.store);
 routes.get('/empresa/dados', empresaController.show);

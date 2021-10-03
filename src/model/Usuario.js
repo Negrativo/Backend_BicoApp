@@ -27,7 +27,7 @@ const UsuarioSchema = new mongoose.Schema({
     },
     avaliacao       : {
         type: Number,
-        default: ''
+        default: 0.0
     },
     favoritosIds    : {
         type: [String],
