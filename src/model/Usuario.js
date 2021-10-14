@@ -36,7 +36,11 @@ const UsuarioSchema = new mongoose.Schema({
     empregos        : {
         type: [String],
         default: ['']
-    }, 
+    },
+    telefone        : {
+        type: Number,
+        default: 0
+    } 
 });
 
 

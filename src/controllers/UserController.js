@@ -5,14 +5,14 @@ module.exports = {
     async store(req, res) {
         try {
             const { nome, email, senha, descricao, fotoPerfil, 
-                    favoritosIds, empregos } = req.body;
+                    favoritosIds, empregos, telefone } = req.body;
 
             let user = await User.findOne({ nome, email });
 
             if (!user){
                 user = await User.create({ 
                     nome, email, senha, descricao, fotoPerfil, 
-                    favoritosIds, empregos
+                    favoritosIds, empregos, telefone
                 });
                 return res.status(201).json(user);
             } else
