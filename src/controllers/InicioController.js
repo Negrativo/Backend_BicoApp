@@ -4,12 +4,17 @@ module.exports = {
     async login(req, res) {
         try {
             const { email, senha } = req.body;
-            console.log({ email, senha });
-            let user = await User.findOne({ email , senha });
-            if (user)
-                return res.status(200).json(user);
-            else
-                return res.status(404).json({error: 'Usuario não encontrado'});
+
+            let user = await User.findOne({ email, senha });
+
+            if (!user) {
+                return res.status(400).json({ error: "Usuário não encontrado" });
+            }
+        
+            return res.status(200).json({
+            user,
+            token: user.generateToken()
+            });
 
         } catch(e) {
             res.status(500).send(e.message);
@@ -19,7 +24,7 @@ module.exports = {
     async cadastrar(req, res) {
         try {
             const { nome, email, senha } = req.body;
-            console.log({nome, email, senha})
+
             let user = await User.findOne({ nome, email , senha });
             
             if (!user){
@@ -35,12 +40,11 @@ module.exports = {
     async finalizarCadastro(req, res) {
         console.log(req);
         try {
-            const { _id, fotoPerfil, empregos, descricao } = req.body;
-            console.log(fotoPerfil, _id, empregos, descricao);
+            const { _id, fotoPerfil, empregos } = req.body;
             let user = await User.findById(_id);
             
             if (user){
-                await User.findByIdAndUpdate(_id,{ imagemPerfil, fotoPerfil, empregos, descricao});
+                await User.findByIdAndUpdate(_id,{ imagemPerfil, fotoPerfil, empregos });
                 return res.status(200).json({ sucess : "Updation successfully"});
             }else
                 return res.status(409).json({error: 'Usuario já cadastrado'});

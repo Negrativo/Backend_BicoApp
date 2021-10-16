@@ -4,16 +4,12 @@ const User = require('../model/Usuario');
 module.exports = {
     async store(req, res) {
         try {
-            const { nome, email, senha, descricao, fotoPerfil, 
-                    favoritosIds, empregos, telefone } = req.body;
+            const { nome, email } = req.body;
 
             let user = await User.findOne({ nome, email });
 
             if (!user){
-                user = await User.create({ 
-                    nome, email, senha, descricao, fotoPerfil, 
-                    favoritosIds, empregos, telefone
-                });
+                user = await User.create(req.body);
                 return res.status(201).json(user);
             } else
                 return res.status(409).json({error: 'User exist'});
@@ -24,12 +20,9 @@ module.exports = {
 
     async show(req, res) {
         try {
-            const { nome, email, senha, 
-                    endereco, avaliacao, cpfuser } = req.body;
+            const { nome, email } = req.body;
 
-            let user = await User.findOne({ 
-                                nome, email, senha, 
-                                endereco, avaliacao, cpfuser });
+            let user = await User.findOne({ nome, email });
 
             if (user){
                 return res.status(200).json(user);
@@ -55,13 +48,12 @@ module.exports = {
 
     async update(req, res) {
         try {
-            const { _id,  nome, email,senha, 
-                    endereco, avaliacao,cpfuser } = req.body;
+            const { _id } = req.body;
             
             let user = await User.findById(_id);
 
             if (user) {
-                await User.findByIdAndUpdate(_id,{nome, email, senha, endereco, avaliacao, cpfuser});
+                await User.findByIdAndUpdate(_id, req.body);
                 return res.status(200).json({ sucess : "Updation successfully"});
             } else
                 return res.status(404).send({ error : 'Not Found'});

@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 
 //Schema -> tabela do user do Banco
 const UsuarioSchema = new mongoose.Schema({
@@ -42,6 +44,19 @@ const UsuarioSchema = new mongoose.Schema({
         default: 0
     } 
 });
+
+UsuarioSchema.methods = {
+   
+    compareHash(hash) {
+        return bcrypt.compare(hash, this.senha);
+    },
+    
+    generateToken() {
+        return jwt.sign({ _id: this._id }, "secret", {
+          expiresIn: 86400
+        });
+    }
+};
 
 
 module.exports = mongoose.model('Usuario', UsuarioSchema);
