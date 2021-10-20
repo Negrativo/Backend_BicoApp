@@ -38,7 +38,6 @@ module.exports = {
     },
 
     async finalizarCadastro(req, res) {
-        console.log(req);
         try {
             const { _id, fotoPerfil, empregos } = req.body;
             let user = await User.findById(_id);
