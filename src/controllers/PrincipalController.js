@@ -4,7 +4,7 @@ module.exports = {
     async groupProfissionais(req, res) {
         try {
             let users = await User.find();
-
+            
             if (users)
                 return res.status(200).json(users);
             else
