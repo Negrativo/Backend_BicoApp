@@ -39,7 +39,7 @@ routes.post('/pesquisa/apagarCargo', pesquisaController.destroy);
 
 routes.post('/favorito/adicionar', authMiddleware, favoritoController.store);
 routes.get('/favorito/buscar', authMiddleware, favoritoController.show);
-routes.post('/favoritos/', authMiddleware, favoritoController.findAll);
+routes.post('/favoritos/lista', authMiddleware, favoritoController.findAll);
 
 routes.post('/usuario/deletarTodos', funcoesController.deleteAllUser);
 

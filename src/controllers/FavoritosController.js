@@ -52,14 +52,16 @@ module.exports = {
 
             const userLogado = await Usuario.findById(_id);
             const favoritos = userLogado.favoritosIds;
-            const userFavoritados = await Usuario.find(favoritos);
 
-            console.log(userFavoritados);
+            if (favoritos.length > 0) {
+                const userFavoritados = await Usuario.find({ '_id': { $in: favoritos} });
             
-            if (userFavoritados){
-                return res.status(201).json(userFavoritados);
+                if (userFavoritados){
+                    return res.status(201).json(userFavoritados);
+                } else
+                    return res.status(409).json({error: 'Usuarios nao localizados'});
             } else
-                return res.status(409).json({error: 'Favorit exist'});
+                return res.status(409).json({error: 'Nao existe favoritos'});
         } catch(e) {
             res.status(500).send(e.message);
         }

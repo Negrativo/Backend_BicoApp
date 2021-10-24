@@ -33,11 +33,11 @@ const UsuarioSchema = new mongoose.Schema({
     },
     favoritosIds    : {
         type: [String],
-        default: ['']
+        default: []
     },
     empregos        : {
         type: [String],
-        default: ['']
+        default: []
     },
     telefone        : {
         type: Number,
