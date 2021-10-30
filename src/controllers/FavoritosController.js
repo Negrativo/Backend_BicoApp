@@ -19,7 +19,7 @@ module.exports = {
             }
 
             if (user){
-                user = await Usuario.findOneAndUpdate({_id: _id}, { favoritosIds: favoritos });
+                await Usuario.updateOne({_id: _id}, { favoritosIds: favoritos });
                 return res.status(201).json({Favoritado: Favoritado});
             } else
                 return res.status(409).json({error: 'User not exist'});
@@ -53,7 +53,7 @@ module.exports = {
             const userLogado = await Usuario.findById(_id);
             const favoritos = userLogado.favoritosIds;
 
-            if (favoritos.length > 0) {
+            if (!!favoritos) {
                 const userFavoritados = await Usuario.find({ '_id': { $in: favoritos} });
             
                 if (userFavoritados){
