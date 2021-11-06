@@ -3,7 +3,8 @@ const User = require('../model/Usuario');
 module.exports = {
     async groupProfissionais(req, res) {
         try {
-            let users = await User.find();
+            const { _id } = req.query;
+            let users = await User.find({ '_id': { $nin: _id } });
             
             if (users)
                 return res.status(200).json(users);

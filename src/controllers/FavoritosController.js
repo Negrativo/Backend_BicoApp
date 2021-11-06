@@ -28,24 +28,6 @@ module.exports = {
         }
     },
 
-    async show(req, res) {
-        try {
-            const { _id, favoritoId } = req.body;
-
-            let user = await Usuario.findById(_id);
-
-            const favoritos = user.favoritosIds;
-            let Favoritado = favoritos.includes(favoritoId);
-
-            if (user){
-                return res.status(201).json({Favoritado: Favoritado});
-            } else
-                return res.status(409).json({error: 'Favorit exist'});
-        } catch(e) {
-            res.status(500).send(e.message);
-        }
-    },
-
     async findAll(req, res) {
         try {
             const { _id } = req.body;
@@ -53,7 +35,7 @@ module.exports = {
             const userLogado = await Usuario.findById(_id);
             const favoritos = userLogado.favoritosIds;
 
-            if (!!favoritos) {
+            if (favoritos.length > 0) {
                 const userFavoritados = await Usuario.find({ '_id': { $in: favoritos} });
             
                 if (userFavoritados){
