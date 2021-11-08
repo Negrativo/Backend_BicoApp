@@ -3,24 +3,13 @@ const Usuario = require('../model/Usuario');
 module.exports = {
     async store(req, res) {
         try {
-            const { _id, favoritoId } = req.body;
+            const { _id, favoritos } = req.body;
 
             let user = await Usuario.findById(_id);
 
-            const favoritos = user.favoritosIds;
-            let Favoritado = favoritos.includes(favoritoId);
-
-            if (Favoritado == false) {
-                favoritos.push(favoritoId);
-                Favoritado = true;
-            } else {
-                favoritos.splice(favoritos.indexOf(favoritoId), 1);
-                Favoritado = false;
-            }
-
             if (user){
-                await Usuario.updateOne({_id: _id}, { favoritosIds: favoritos });
-                return res.status(201).json({Favoritado: Favoritado});
+                user = await Usuario.updateOne({_id: _id}, { favoritosIds: favoritos });
+                return res.status(201).json(user);
             } else
                 return res.status(409).json({error: 'User not exist'});
         } catch(e) {
@@ -30,20 +19,14 @@ module.exports = {
 
     async findAll(req, res) {
         try {
-            const { _id } = req.body;
+            const { favoritosIds } = req.body;
 
-            const userLogado = await Usuario.findById(_id);
-            const favoritos = userLogado.favoritosIds;
-
-            if (favoritos.length > 0) {
-                const userFavoritados = await Usuario.find({ '_id': { $in: favoritos} });
-            
-                if (userFavoritados){
-                    return res.status(201).json(userFavoritados);
-                } else
-                    return res.status(409).json({error: 'Usuarios nao localizados'});
+            const userFavoritados = await Usuario.find({ '_id': { $in: favoritosIds} });
+        
+            if (userFavoritados.length > 0){
+                return res.status(201).json(userFavoritados);
             } else
-                return res.status(409).json({error: 'Nao existe favoritos'});
+                return res.status(409).json({error: 'Usuarios nao localizados'});
         } catch(e) {
             res.status(500).send(e.message);
         }
