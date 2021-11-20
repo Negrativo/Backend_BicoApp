@@ -17,7 +17,7 @@ const upload = multer(uploadConfig);
 
 routes.post('/usuario/cadastro', upload.single('imagemPerfil'), userController.store);
 routes.get('/usuario/dados', authMiddleware, userController.show);
-routes.put('/usuario/alterarDados', upload.single('imagemPerfil'), userController.update);
+routes.post('/usuario/alterarDados', authMiddleware, userController.update);
 routes.post('/usuario/deletar', authMiddleware, userController.destroy);
 routes.post('/usuario/dadosSelecionado', authMiddleware, userController.findById);
 

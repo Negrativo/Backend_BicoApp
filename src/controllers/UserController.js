@@ -53,7 +53,7 @@ module.exports = {
             let user = await User.findById(_id);
 
             if (user) {
-                await User.findByIdAndUpdate(_id, req.body);
+                await User.updateOne({_id: _id}, req.body);
                 return res.status(200).json({ sucess : "Updation successfully"});
             } else
                 return res.status(404).send({ error : 'Not Found'});
