@@ -7,7 +7,7 @@ module.exports = {
 
             let user = await Usuario.findById(_id);
 
-            const favoritos = user.favoritosIds;
+            let favoritos = user.favoritosIds;
             let Favoritado = favoritos.includes(favoritoId);
 
             if (Favoritado == false) {
