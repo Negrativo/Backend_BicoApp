@@ -8,14 +8,9 @@ const app = express();
 app.use(express.json({limit: '1mb'}));
 app.use(routes);
 
-
 mongoose.connect('mongodb+srv://sistema:lucas322@cluster0.aedhy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',{
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
 
-
-
-
-app.listen(19003);
-
+app.listen(19002);
