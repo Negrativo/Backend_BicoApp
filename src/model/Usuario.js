@@ -19,30 +19,42 @@ const UsuarioSchema = new mongoose.Schema({
         max:  20,
         min:  5
     },
-    descricao       : {
+    descricao : {
         type: String,
         default: '',
     },
-    fotoPerfil      : {
+    fotoPerfil : {
         type: String,
         default: ''
     },
-    avaliacao       : {
+    avaliacao : {
         type: Number,
         default: 0.0
     },
-    favoritosIds    : {
+    favoritosIds : {
         type: [String],
         default: []
     },
-    empregos        : {
+    empregos : {
         type: [String],
         default: []
     },
-    telefone        : {
+    telefone : {
         type: Number,
         default: 0
-    } 
+    },
+    latitude : {
+        type: Number,
+        default: 0
+    },
+    longitude : {
+        type: Number,
+        default: 0
+    },
+    endereço : {
+        type: String,
+        default: "" 
+    },
 });
 
 UsuarioSchema.methods = {
